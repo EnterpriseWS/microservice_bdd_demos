@@ -178,19 +178,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\MultiTierBenefitBdd.feature.cs">
+    <Compile Include="Features\MultiTierBenefitCostshare.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MultiTierBenefitBdd.feature</DependentUpon>
+      <DependentUpon>MultiTierBenefitCostshare.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Steps\MultiTierBenefitBddSteps.cs" />
+    <Compile Include="MiscUnitTests.cs" />
+    <Compile Include="Steps\MultiTierBenefitCostshareSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\MultiTierBenefitBdd.feature">
+    <None Include="Features\MultiTierBenefitCostshare.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>MultiTierBenefitBdd.feature.cs</LastGenOutput>
+      <LastGenOutput>MultiTierBenefitCostshare.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

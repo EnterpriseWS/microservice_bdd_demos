@@ -18,7 +18,7 @@ namespace BenefitCsBdd.Tests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class FlexAdvantageBenefitFeature
+    public partial class MultiTierBenefitCostshareFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -41,9 +41,9 @@ namespace BenefitCsBdd.Tests.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "FlexAdvantageBenefit", "\tA new multi-tier benefit structure that covers\r\n\tMedical, dental & Rx major cate" +
-                    "gories. It has \r\n\tseparate levels of co-insurance amount and PCP\r\n\tfocused provi" +
-                    "der network", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "MultiTierBenefitCostshare", " A new multi-tier benefit structure that covers\r\n Medical, dental & Rx major cate" +
+                    "gories. It has \r\n separate levels of cost share amount and PCP\r\n focused provide" +
+                    "r network", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -58,9 +58,9 @@ namespace BenefitCsBdd.Tests.Features
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "FlexAdvantageBenefit")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "MultiTierBenefitCostshare")))
             {
-                global::BenefitCsBdd.Tests.Features.FlexAdvantageBenefitFeature.FeatureSetup(null);
+                global::BenefitCsBdd.Tests.Features.MultiTierBenefitCostshareFeature.FeatureSetup(null);
             }
         }
         
@@ -87,25 +87,29 @@ namespace BenefitCsBdd.Tests.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Multi_tier medical benefit contains at least two levels of deductible")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FlexAdvantageBenefit")]
-        public virtual void Multi_TierMedicalBenefitContainsAtLeastTwoLevelsOfDeductible()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Multi_tier medical benefit contains at least two levels of deductible according t" +
+            "o number of tiers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MultiTierBenefitCostshare")]
+        public virtual void Multi_TierMedicalBenefitContainsAtLeastTwoLevelsOfDeductibleAccordingToNumberOfTiers()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Multi_tier medical benefit contains at least two levels of deductible", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Multi_tier medical benefit contains at least two levels of deductible according t" +
+                    "o number of tiers", null, ((string[])(null)));
             this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-            testRunner.Given("The medical benefit has level one deductible and level two deductible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+            testRunner.Given("The medical benefit has level_one deductible and level_two deductible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
             testRunner.When("I inquire the deductible amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.Then("the result should output level one and level two deductible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            testRunner.Then("the result should output level_one and level_two deductible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Multi-tier medical benefit contains only one max OOP amount")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FlexAdvantageBenefit")]
-        public virtual void Multi_TierMedicalBenefitContainsOnlyOneMaxOOPAmount()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Multi_tier medical benefit contains only one max OOP amount regardless number of " +
+            "tiers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MultiTierBenefitCostshare")]
+        public virtual void Multi_TierMedicalBenefitContainsOnlyOneMaxOOPAmountRegardlessNumberOfTiers()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Multi-tier medical benefit contains only one max OOP amount", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Multi_tier medical benefit contains only one max OOP amount regardless number of " +
+                    "tiers", null, ((string[])(null)));
             this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
             testRunner.Given("The medical benefit has only one max OOP amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -115,11 +119,11 @@ namespace BenefitCsBdd.Tests.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("All tiers claim amount accumulation toward to OOP amount")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FlexAdvantageBenefit")]
-        public virtual void AllTiersClaimAmountAccumulationTowardToOOPAmount()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("All tiers claim amount accumulation toward to one OOP amount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MultiTierBenefitCostshare")]
+        public virtual void AllTiersClaimAmountAccumulationTowardToOneOOPAmount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All tiers claim amount accumulation toward to OOP amount", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All tiers claim amount accumulation toward to one OOP amount", null, ((string[])(null)));
             this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -182,9 +186,20 @@ namespace BenefitCsBdd.Tests.Features
                         "2",
                         "Tissue Removal",
                         "220.00"});
-            testRunner.Given("The table below records insured member medical claim for all tiers", ((string)(null)), table1, "Given ");
+            testRunner.Given("The table below contains a sample of insured member medical claims for all tiers", ((string)(null)), table1, "Given ");
+            testRunner.And("the max OOP amount is five hundred dollars", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
             testRunner.When("I inquire a member current OOP amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.Then("the result should output a summation of all claims", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "MemberId",
+                        "OopAmount"});
+            table2.AddRow(new string[] {
+                        "X0001",
+                        "375.00"});
+            table2.AddRow(new string[] {
+                        "X0002",
+                        "500.00"});
+            testRunner.Then("the result should be either a sum of claim amounts or its max OOP amount as the t" +
+                    "able below", ((string)(null)), table2, "Then ");
             this.ScenarioCleanup();
         }
     }

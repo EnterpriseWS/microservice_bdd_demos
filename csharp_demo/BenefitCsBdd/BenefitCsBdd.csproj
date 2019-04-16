@@ -171,16 +171,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BenefitDbContext.cs" />
     <Compile Include="BenefitRepository.cs" />
-    <Compile Include="Claim.cs" />
+    <Compile Include="Models\Claim.cs" />
     <Compile Include="Controllers\OopMaxController.cs" />
     <Compile Include="MultiTierBenefit.cs" />
     <Compile Include="Controllers\DeductibleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Deductible.cs" />
+    <Compile Include="Models\Deductible.cs" />
     <Compile Include="IBenefit.cs" />
-    <Compile Include="OopMax.cs" />
+    <Compile Include="Models\OopMax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +194,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

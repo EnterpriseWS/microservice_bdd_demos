@@ -9,31 +9,46 @@ using TechTalk.SpecFlow.Assist;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using BenefitCsBdd.Controllers;
 
 namespace BenefitCsBdd.Tests.Steps
 {
     [Binding]
     public class MultiTierBenefitCostshareSteps
     {
-        protected Mock<IBenefitRepository> _mockRepository = new Mock<IBenefitRepository>();
-        protected List<Deductible> _mockDeduct = new List<Deductible>();
-        protected IEnumerable<Deductible> _deduct;
-        protected SqliteConnection _conn;
-        protected DbContextOptions<BenefitDbContext> _options;
-        protected decimal _claimTotal;
+        public DeductibleController _deductController = null;
+        public IEnumerable<Deductible> _deductibles = null;
+
+        //protected Mock<IBenefitRepository> _mockRepository = new Mock<IBenefitRepository>();
+        //protected List<Deductible> _mockDeduct = new List<Deductible>();
+        //protected OopMax _mockOop = null;
+        //protected IEnumerable<Deductible> _deduct;
+        //protected SqliteConnection _conn;
+        //protected DbContextOptions<BenefitDbContext> _options;
+        //protected decimal _claimTotal;
 
         [Given(@"The medical benefit has level_one deductible and level_two deductible")]
         public void GivenTheMedicalBenefitHasLevel_OneDeductibleAndLevel_TwoDeductible()
         {
-            _mockDeduct.Add(new Deductible() { Level = 1, Amount = 2000 });
-            _mockDeduct.Add(new Deductible() { Level = 2, Amount = 3000 });
-            _mockRepository.Setup(repository => repository.GetDeductible("ABC00001")).Returns(_mockDeduct);
+            var deductibles = new List<Deductible>()
+            {
+                new Deductible() {ProductId = "ABC00001", Tier = 1, Amount = 250 },
+                new Deductible() {ProductId = "ABC00001", Tier = 2, Amount = 350 }
+            };
+            var mockBenefit = new Mock<IBenefit>();
+            mockBenefit.Setup(deduct => deduct.GetDeductible("X0001")).Returns(deductibles);
+
+            _deductController = new DeductibleController(mockBenefit.Object);
         }
 
         [Given(@"The medical benefit has only one max OOP amount")]
         public void GivenTheMedicalBenefitHasOnlyOneMaxOOPAmount()
         {
-            ScenarioContext.Current.Pending();
+            var oopMax = new OopMax() { ProductId = "ABC00001", Amount = 500 };
+            var mockBenefit = new Mock<IBenefit>();
+            mockBenefit.Setup(repository => repository.GetOopMax("ABC00001")).Returns(oopMax);
+
+            _oopMaxController = new OopMaxController(mockBenefit.Object);
         }
 
         [Given(@"The table below contains a sample of insured member medical claims for all tiers")]
@@ -81,8 +96,15 @@ namespace BenefitCsBdd.Tests.Steps
         [When(@"I inquire the deductible amount")]
         public void WhenIInquireTheDeductibleAmount()
         {
-            var benefit = new MultiTierBenefit(_mockRepository.Object);
-            _deduct = benefit.GetDeductible("ABC00001");
+            try
+            {
+                _deductibles = _deductController.Get("X0001");
+                _deductibles.Should().NotBeNull();
+            }
+            catch (Exception e)
+            {
+                e.Message.Should().BeNullOrEmpty();
+            }
         }
 
         [When(@"I inquire the max OOP amount")]
@@ -119,8 +141,7 @@ namespace BenefitCsBdd.Tests.Steps
         [Then(@"the result should output level_one and level_two deductible")]
         public void ThenTheResultShouldOutputLevel_OneAndLevel_TwoDeductible()
         {
-            _deduct.Single(d => d.Level == 1).Amount.Should().Be(2000);
-            _deduct.Single(d => d.Level == 2).Amount.Should().Be(3000);
+            _deductibles.Count<Deductible>().Should().Be(2);
         }
 
         [Then(@"the result should output one max OOP amount")]

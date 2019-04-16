@@ -5,9 +5,9 @@ using System.Web;
 
 namespace BenefitCsBdd
 {
-    public class MaxOop
+    public class OopMax
     {
-        public int MaxOopId { get; set;}
+        public int OopMaxId { get; set;}
         public string ProductId { get; set; }
         public decimal Amount { get; set; }
     }

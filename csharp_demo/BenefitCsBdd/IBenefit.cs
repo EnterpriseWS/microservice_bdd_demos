@@ -7,5 +7,6 @@ namespace BenefitCsBdd
     {
         IEnumerable<Deductible> GetDeductible(string productId);
         IEnumerable<Claim> GetClaim(string memberId);
+        OopMax GetOopMax(string memberId);
     }
 }

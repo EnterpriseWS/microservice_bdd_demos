@@ -172,14 +172,15 @@
     <Compile Include="BenefitDbContext.cs" />
     <Compile Include="BenefitRepository.cs" />
     <Compile Include="Claim.cs" />
+    <Compile Include="Controllers\OopMaxController.cs" />
     <Compile Include="MultiTierBenefit.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\DeductibleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Deductible.cs" />
     <Compile Include="IBenefit.cs" />
-    <Compile Include="MaxOop.cs" />
+    <Compile Include="OopMax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,10 @@ namespace BenefitCsBdd
             return ValidateProductId(productId) ? _repository.GetDeductible(productId) : null;
         }
 
+        public OopMax GetOopMax(string memberId)
+        {
+            return ValidateProductId(productId) ? _repository.GetDeductible(productId) : null;
+        }
 
         public IEnumerable<Claim> GetClaim(string memberId)
         {

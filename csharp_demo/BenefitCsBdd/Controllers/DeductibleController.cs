@@ -16,15 +16,9 @@ namespace BenefitCsBdd.Controllers
             _benefit = benefit;
         }
 
-        public IEnumerable<Deductible> Get(string memberId)
+        public IEnumerable<Deductible> Get(string productId)
         {
-            return _benefit.GetDeductible(memberId);
-        }
-
-        // GET: api/Default/5
-        public string Get(int id)
-        {
-            return "value";
+            return _benefit.GetDeductible(productId);
         }
     }
 }

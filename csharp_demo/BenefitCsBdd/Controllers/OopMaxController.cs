@@ -21,11 +21,5 @@ namespace BenefitCsBdd.Controllers
         {
             return _benefit.GetOopMax(memberId);
         }
-
-        // GET: api/OopMax/5
-        public string Get(int id)
-        {
-            return "value";
-        }
     }
 }

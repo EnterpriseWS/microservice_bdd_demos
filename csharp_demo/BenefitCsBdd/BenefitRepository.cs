@@ -9,6 +9,7 @@ namespace BenefitCsBdd
     public interface IBenefitRepository
     {
         IEnumerable<Deductible> GetDeductible(string productId);
+        OopMax GetOopMax(string productId);
         IEnumerable<Claim> GetClaim(string memberId);
     }
 
@@ -22,6 +23,15 @@ namespace BenefitCsBdd
         }
 
         public IEnumerable<Deductible> GetDeductible(string productId)
+        {
+            //return _context.Deductibles
+            //    .Where(deduct => deduct.ProductId.ToLower().Equals(productId.ToLower().Trim()))
+            //    .OrderBy(deduct => deduct.Level)
+            //    .ToList();
+            throw new NotImplementedException();
+        }
+
+        public OopMax GetOopMax(string productId)
         {
             //return _context.Deductibles
             //    .Where(deduct => deduct.ProductId.ToLower().Equals(productId.ToLower().Trim()))

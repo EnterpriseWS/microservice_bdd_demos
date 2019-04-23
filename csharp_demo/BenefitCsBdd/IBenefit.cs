@@ -6,7 +6,7 @@ namespace BenefitCsBdd
     public interface IBenefit
     {
         IEnumerable<Deductible> GetDeductible(string productId);
-        IEnumerable<Claim> GetClaim(string memberId);
-        OopMax GetOopMax(string memberId);
+        OopMax GetOopMax(string productId);
+        decimal GetOopMaxMet(string memberId);
     }
 }

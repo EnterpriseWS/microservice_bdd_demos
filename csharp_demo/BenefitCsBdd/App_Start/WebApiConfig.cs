@@ -13,19 +13,22 @@ namespace BenefitCsBdd
 
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-            var settings = (NameValueCollection)ConfigurationManager.GetSection("wellknownSite/sites");
-            foreach (string key in settings.AllKeys)
-                WellknownSites.Add(settings[key].ToString().Trim());
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "OopMaxMetApi",
+                routeTemplate: "api/oopmaxmet/{action}/{memberId}",
+                //constraints: new
+                //{
+                //    memberId = @"\d{9}"
+                //},
+                defaults: new { controller = "OopMax", action = "GetMet" });
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+                defaults: new { id = RouteParameter.Optional });
         }
     }
 }

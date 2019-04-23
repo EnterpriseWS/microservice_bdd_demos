@@ -42,7 +42,6 @@ namespace BenefitCsBdd
 
             container.RegisterType<IBenefitRepository, BenefitRepository>();
             container.RegisterType<IBenefit, MultiTierBenefit>();
-            container.RegisterType<IBenefitRepository, BenefitRepository>();
         }
     }
 }

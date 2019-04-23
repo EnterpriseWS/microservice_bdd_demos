@@ -28,14 +28,19 @@ namespace BenefitCsBdd
             return ValidateMemberId(memberId) ? _repository.GetClaim(memberId) : null;
         }
 
-        public decimal GetClaimTotal(string memberId)
+        public decimal GetOopMaxMet(string memberId)
         {
             var claims = GetClaim(memberId);
-            return claims == null 
-                ? (decimal)0.0
-                : claims.Select(claim => claim.Amount)
-                  .ToList()
-                  .Sum();
+            if (claims != null && claims.Any())
+            {
+                var oopMaxAmount = GetOopMax(claims.First().ProductId).Amount;
+                var claimsSum = claims.Select(claim => claim.Amount)
+                                .ToList()
+                                .Sum();
+                return claimsSum > oopMaxAmount ? oopMaxAmount : claimsSum;
+            }
+            else
+                return 0;
         }
 
         // Added input validation to avoid vulnerbility

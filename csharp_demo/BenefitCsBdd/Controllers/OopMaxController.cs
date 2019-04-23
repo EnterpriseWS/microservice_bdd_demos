@@ -17,9 +17,14 @@ namespace BenefitCsBdd.Controllers
         }
 
         // GET: api/OopMax
-        public OopMax Get(string memberId)
+        public OopMax Get(string productId)
         {
-            return _benefit.GetOopMax(memberId);
+            return _benefit.GetOopMax(productId);
+        }
+
+        public decimal GetMet(string memberId)
+        {
+            return _benefit.GetOopMaxMet(memberId);
         }
     }
 }

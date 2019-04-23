@@ -1,7 +1,7 @@
 ﻿using System;
 using TechTalk.SpecFlow;
 using FluentAssertions;
-using BenefitCsBdd;
+//using BenefitCsBdd;
 using Moq;
 using System.Linq;
 using System.Collections.Generic;
@@ -16,16 +16,17 @@ namespace BenefitCsBdd.Tests.Steps
     [Binding]
     public class MultiTierBenefitCostshareSteps
     {
+        public OopMaxController _oopMaxController = null;
         public DeductibleController _deductController = null;
         public IEnumerable<Deductible> _deductibles = null;
 
-        //protected Mock<IBenefitRepository> _mockRepository = new Mock<IBenefitRepository>();
-        //protected List<Deductible> _mockDeduct = new List<Deductible>();
-        //protected OopMax _mockOop = null;
+        protected Mock<IBenefitRepository> _mockRepository = new Mock<IBenefitRepository>();
+        protected List<Deductible> _mockDeduct = new List<Deductible>();
+        protected OopMax _mockOop = null;
         //protected IEnumerable<Deductible> _deduct;
-        //protected SqliteConnection _conn;
-        //protected DbContextOptions<BenefitDbContext> _options;
-        //protected decimal _claimTotal;
+        protected SqliteConnection _conn;
+        protected DbContextOptions<BenefitDbContext> _options;
+        protected decimal _claimTotal;
 
         [Given(@"The medical benefit has level_one deductible and level_two deductible")]
         public void GivenTheMedicalBenefitHasLevel_OneDeductibleAndLevel_TwoDeductible()
@@ -98,7 +99,7 @@ namespace BenefitCsBdd.Tests.Steps
         {
             try
             {
-                _deductibles = _deductController.Get("X0001");
+                _deductibles = _deductController.Get("ABC00001");
                 _deductibles.Should().NotBeNull();
             }
             catch (Exception e)
@@ -123,7 +124,7 @@ namespace BenefitCsBdd.Tests.Steps
                 {
                     var benefitDb = new BenefitRepository(context);
                     var benefit = new MultiTierBenefit(benefitDb);
-                    _claimTotal = benefit.GetClaimTotal("X0002");
+                    _claimTotal = benefit.GetOopMaxMet("X0002");
                 }
             }
             catch (Exception e)

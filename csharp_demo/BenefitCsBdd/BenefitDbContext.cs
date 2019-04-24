@@ -11,6 +11,7 @@ namespace BenefitCsBdd
     public class BenefitDbContext : DbContext
     {
         public DbSet<Deductible> Deductibles { get; set; }
+        public DbSet<OopMax> OopMaxes { get; set; }
         public DbSet<Claim> Claims { get; set; }
 
         public BenefitDbContext() { }

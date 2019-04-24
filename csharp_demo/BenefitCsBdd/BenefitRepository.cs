@@ -24,20 +24,31 @@ namespace BenefitCsBdd
 
         public IEnumerable<Deductible> GetDeductible(string productId)
         {
-            //return _context.Deductibles
-            //    .Where(deduct => deduct.ProductId.ToLower().Equals(productId.ToLower().Trim()))
-            //    .OrderBy(deduct => deduct.Level)
-            //    .ToList();
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Deductibles
+                    .Where(deduct => deduct.ProductId.ToLower().Equals(productId.ToLower().Trim()))
+                    .OrderBy(deduct => deduct.Tier)
+                    .ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public OopMax GetOopMax(string productId)
         {
-            //return _context.Deductibles
-            //    .Where(deduct => deduct.ProductId.ToLower().Equals(productId.ToLower().Trim()))
-            //    .OrderBy(deduct => deduct.Level)
-            //    .ToList();
-            throw new NotImplementedException();
+            try
+            {
+                return _context.OopMaxes
+                    .Where(oopMax => oopMax.ProductId.ToLower().Equals(productId.ToLower().Trim()))
+                    .First();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Claim> GetClaim(string memberId)

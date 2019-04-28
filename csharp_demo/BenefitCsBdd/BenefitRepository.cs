@@ -8,9 +8,9 @@ namespace BenefitCsBdd
 {
     public interface IBenefitRepository
     {
-        IEnumerable<Deductible> GetDeductible(string productId);
+        IEnumerable<Deductible> GetDeductibles(string productId);
         OopMax GetOopMax(string productId);
-        IEnumerable<Claim> GetClaim(string memberId);
+        IEnumerable<Claim> GetClaims(string memberId);
     }
 
     public class BenefitRepository : IBenefitRepository
@@ -22,7 +22,7 @@ namespace BenefitCsBdd
             _context = context;
         }
 
-        public IEnumerable<Deductible> GetDeductible(string productId)
+        public IEnumerable<Deductible> GetDeductibles(string productId)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace BenefitCsBdd
             }
         }
 
-        public IEnumerable<Claim> GetClaim(string memberId)
+        public IEnumerable<Claim> GetClaims(string memberId)
         {
             return _context.Claims
                 .Where(claim => claim.MemberId.ToLower() == memberId.ToLower())

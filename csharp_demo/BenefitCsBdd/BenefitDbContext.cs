@@ -24,6 +24,7 @@ namespace BenefitCsBdd
         {
             if (!optionsBuilder.IsConfigured)
             {
+                // Since this is not part of a unit testing, it is safe to use PostgreSQL database or other brand's.
                 optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["BenefitDbConnect"].ConnectionString);
             }
         }

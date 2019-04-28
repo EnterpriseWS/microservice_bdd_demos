@@ -18,7 +18,7 @@ namespace BenefitCsBdd.Controllers
 
         public IEnumerable<Deductible> Get(string productId)
         {
-            return _benefit.GetDeductible(productId);
+            return _benefit.GetDeductibles(productId);
         }
     }
 }

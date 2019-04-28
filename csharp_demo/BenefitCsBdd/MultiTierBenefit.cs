@@ -13,9 +13,9 @@ namespace BenefitCsBdd
             _repository = repository;
         }
 
-        public IEnumerable<Deductible> GetDeductible(string productId)
+        public IEnumerable<Deductible> GetDeductibles(string productId)
         {
-            return ValidateProductId(productId) ? _repository.GetDeductible(productId) : null;
+            return ValidateProductId(productId) ? _repository.GetDeductibles(productId) : null;
         }
 
         public OopMax GetOopMax(string productId)
@@ -23,14 +23,14 @@ namespace BenefitCsBdd
             return ValidateProductId(productId) ? _repository.GetOopMax(productId) : null;
         }
 
-        public IEnumerable<Claim> GetClaim(string memberId)
+        public IEnumerable<Claim> GetClaims(string memberId)
         {
-            return ValidateMemberId(memberId) ? _repository.GetClaim(memberId) : null;
+            return ValidateMemberId(memberId) ? _repository.GetClaims(memberId) : null;
         }
 
         public decimal GetOopMaxMet(string memberId)
         {
-            var claims = GetClaim(memberId);
+            var claims = GetClaims(memberId);
             if (claims != null && claims.Any())
             {
                 var oopMaxAmount = GetOopMax(claims.First().ProductId).Amount;

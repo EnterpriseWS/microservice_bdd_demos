@@ -19,14 +19,12 @@ namespace BenefitCsBdd.Tests.Steps
         public OopMaxController _oopMaxController = null;
         public DeductibleController _deductController = null;
         public IEnumerable<Deductible> _deductibles = null;
+        public OopMax _oopMax = null;
 
-        protected Mock<IBenefitRepository> _mockRepository = new Mock<IBenefitRepository>();
-        protected List<Deductible> _mockDeduct = new List<Deductible>();
-        protected OopMax _mockOop = null;
-        //protected IEnumerable<Deductible> _deduct;
         protected SqliteConnection _conn;
         protected DbContextOptions<BenefitDbContext> _options;
-        protected decimal _claimTotal;
+        protected decimal _claimTotalMember1;
+        protected decimal _claimTotalMember2;
 
         [Given(@"The medical benefit has level_one deductible and level_two deductible")]
         public void GivenTheMedicalBenefitHasLevel_OneDeductibleAndLevel_TwoDeductible()
@@ -37,11 +35,12 @@ namespace BenefitCsBdd.Tests.Steps
                 new Deductible() {ProductId = "ABC00001", Tier = 2, Amount = 350 }
             };
             var mockBenefit = new Mock<IBenefit>();
-            mockBenefit.Setup(deduct => deduct.GetDeductible("X0001")).Returns(deductibles);
+            mockBenefit.Setup(benefit => benefit.GetDeductibles("ABC00001")).Returns(deductibles);
 
             _deductController = new DeductibleController(mockBenefit.Object);
         }
 
+        [Given(@"the max OOP amount is five hundred dollars")]
         [Given(@"The medical benefit has only one max OOP amount")]
         public void GivenTheMedicalBenefitHasOnlyOneMaxOOPAmount()
         {
@@ -79,19 +78,16 @@ namespace BenefitCsBdd.Tests.Steps
                     {
                         context.Claims.Add(claim);
                     }
+                    var oopMax = new OopMax() { ProductId = "ABC00001", Amount = 500 };
+                    context.OopMaxes.Add(oopMax);
                     var writeCount = context.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-
+                // Any exception occurs, it should be considered testing failed.
+                e.Message.Should().BeNullOrEmpty();
             }
-        }
-
-        [Given(@"the max OOP amount is five hundred dollars")]
-        public void GivenTheMaxOOPAmountIsFiveHundredDollars()
-        {
-            ScenarioContext.Current.Pending();
         }
         
         [When(@"I inquire the deductible amount")]
@@ -104,6 +100,7 @@ namespace BenefitCsBdd.Tests.Steps
             }
             catch (Exception e)
             {
+                // Any exception occurs, it should be considered testing failed.
                 e.Message.Should().BeNullOrEmpty();
             }
         }
@@ -111,7 +108,16 @@ namespace BenefitCsBdd.Tests.Steps
         [When(@"I inquire the max OOP amount")]
         public void WhenIInquireTheMaxOOPAmount()
         {
-            ScenarioContext.Current.Pending();
+            try
+            {
+                _oopMax = _oopMaxController.Get("ABC00001");
+                _oopMax.Should().NotBeNull();
+            }
+            catch (Exception e)
+            {
+                // Any exception occurs, it should be considered testing failed.
+                e.Message.Should().BeNullOrEmpty();
+            }
         }
 
         [When(@"I inquire a member current OOP amount")]
@@ -124,12 +130,14 @@ namespace BenefitCsBdd.Tests.Steps
                 {
                     var benefitDb = new BenefitRepository(context);
                     var benefit = new MultiTierBenefit(benefitDb);
-                    _claimTotal = benefit.GetOopMaxMet("X0002");
+                    _claimTotalMember1 = benefit.GetOopMaxMet("X0001");
+                    _claimTotalMember2 = benefit.GetOopMaxMet("X0002");
                 }
             }
             catch (Exception e)
             {
-
+                // Any exception occurs, it should be considered testing failed.
+                e.Message.Should().BeNullOrEmpty();
             }
             finally
             {
@@ -148,13 +156,14 @@ namespace BenefitCsBdd.Tests.Steps
         [Then(@"the result should output one max OOP amount")]
         public void ThenTheResultShouldOutputOneMaxOOPAmount()
         {
-            ScenarioContext.Current.Pending();
+            _oopMax.Amount.Should().Be(500);
         }
 
         [Then(@"the result should be either a sum of claim amounts or its max OOP amount as the table below")]
         public void ThenTheResultShouldBeEitherASumOfClaimAmountsOrItsMaxOOPAmountAsTheTableBelow(Table table)
         {
-            _claimTotal.Should().Be((decimal)720.0);
+            _claimTotalMember1.Should().Be((decimal)375.0);
+            _claimTotalMember2.Should().Be((decimal)500.0);
         }
     }
 }

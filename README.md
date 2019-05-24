@@ -4,9 +4,9 @@ This code repository consists of two parts - C# code and Python code. Both serve
 ![BDD Lifecycle](docs/bdd_cycle.png)
 
 ##### [csharp_demo](https://github.com/EnterpriseWS/microservice_bdd_demos/tree/master/csharp_demo) Folder
-**Operating System:** Windows 7 and above
-**Developer IDE:** Microsoft Visual Studio 2017
-**.Net Framework:** 4.5 and above
+- **Operating System:** Windows 7 and above
+- **Developer IDE:** Microsoft Visual Studio 2017
+- **.Net Framework:** 4.5 and above
 
 ##### [python_demo](https://github.com/EnterpriseWS/microservice_bdd_demos/tree/master/python_demo) Folder
 (TBD)
